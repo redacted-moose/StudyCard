@@ -1,6 +1,6 @@
 ﻿namespace StudyCard
 {
-    partial class Form1
+    partial class StudyCard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.newDeckButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Form1
+            // newDeckButton
+            // 
+            this.newDeckButton.Location = new System.Drawing.Point(163, 458);
+            this.newDeckButton.Name = "newDeckButton";
+            this.newDeckButton.Size = new System.Drawing.Size(145, 53);
+            this.newDeckButton.TabIndex = 0;
+            this.newDeckButton.Text = "New Deck";
+            this.newDeckButton.UseVisualStyleBackColor = true;
+            this.newDeckButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // StudyCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 255);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(782, 555);
+            this.Controls.Add(this.newDeckButton);
+            this.Name = "StudyCard";
+            this.Text = "StudyCard";
+            this.UseWaitCursor = true;
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Button newDeckButton;
     }
 }
 
