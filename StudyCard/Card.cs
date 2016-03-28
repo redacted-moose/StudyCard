@@ -1,6 +1,6 @@
 ﻿using System;
 
-public abstract class Card
+public class Card
 {
     int _id;
     string _frontText;
@@ -8,8 +8,20 @@ public abstract class Card
     public string FrontText
     {
         get
-        { return this._frontText; }
+        {
+            return this._frontText;
+        }
     }
     public string BackText
-    { get { return this._backText; } }
+    {
+        get
+        {
+            return this._backText; 
+        }
+    }
+    public Card(string front, string back)
+    {
+        this._frontText = front;
+        this._backText = back;
+    }
 }
