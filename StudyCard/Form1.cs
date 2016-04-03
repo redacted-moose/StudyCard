@@ -27,7 +27,7 @@ namespace StudyCard
             // Deck d = new Deck("test");
             // ls.Add(d);
             // textBox1.AppendText("test worked");
-            string thing = listView1.SelectedItems.ToString();
+            // string thing = listView1.SelectedItems.ToString();
             // View the Deck!
             // new form (thing).Show();
         }
@@ -47,16 +47,22 @@ namespace StudyCard
             Deck d = new Deck(text);
             ls.Add(d);
             // textBox1.AppendText(text);
-            listView1.Items.Add(text);
+            // listView1.Items.Add(text);
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new NewDeckForm(this).Show();
+            // new NewDeckForm(this).Show();
+
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
