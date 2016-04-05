@@ -7,6 +7,11 @@ public class Deck
     public string name;
     public List<Card> deck;
     //Array<Card> cards;
+    public Deck()
+    {
+        this.name = "test";
+        this.deck = new List<Card>();
+    }
 	public Deck(string name)
 	{
         this.name = name;

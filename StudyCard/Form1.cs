@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace StudyCard
 {
@@ -62,7 +64,26 @@ namespace StudyCard
 
         private void button2_Click(object sender, EventArgs e)
         {
+            SerializeElement();
+        }
 
+        private void SerializeElement()
+        {
+            // XmlSerializer ser = new XmlSerializer(typeof(Card));
+            // TextWriter writer = new StreamWriter(filename);
+            // ser.Serialize(writer, new Card("hey", "backstring--"));
+            // writer.Close();
+            // Card overview = new Card();
+            Deck test = new Deck("testy");
+            test.AddCard("front1", "back1");
+            test.AddCard("iZombie", "Olivia");
+            test.AddCard("Vmars", "Hollence");
+            System.Xml.Serialization.XmlSerializer writer =
+                new System.Xml.Serialization.XmlSerializer(typeof(Deck));
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "//StudycardxmllOverview.xml";
+            System.IO.FileStream file = System.IO.File.Create(path);
+            writer.Serialize(file,test);
+            file.Close();
         }
     }
 }

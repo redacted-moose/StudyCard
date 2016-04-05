@@ -3,25 +3,31 @@
 public class Card
 {
     int _id;
-    string _frontText;
-    string _backText;
+    string frontText;
+    string backText;
     public string FrontText
     {
         get
         {
-            return this._frontText;
+            return this.frontText;
         }
     }
     public string BackText
     {
         get
         {
-            return this._backText; 
+            return this.backText; 
         }
     }
     public Card(string front, string back)
     {
-        this._frontText = front;
-        this._backText = back;
+        this.frontText = front;
+        this.backText = back;
+    }
+
+    public Card()
+    {
+        this.frontText = "hey";
+        this.backText = "backside text here";
     }
 }
