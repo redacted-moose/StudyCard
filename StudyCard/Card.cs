@@ -3,8 +3,8 @@
 public class Card
 {
     int _id;
-    string frontText;
-    string backText;
+    public string frontText;
+    public string backText;
     public string FrontText
     {
         get
