@@ -85,5 +85,23 @@ namespace StudyCard
             writer.Serialize(file,test);
             file.Close();
         }
+
+        public void ReadXML()
+        {
+            System.Xml.Serialization.XmlSerializer reader =
+                new System.Xml.Serialization.XmlSerializer(typeof(Deck));
+            System.IO.StreamReader file = new System.IO.StreamReader(
+                @"C:\Users\edwardjh\Documents\StudycardxmllOverview.xml");
+            Deck overview = (Deck)reader.Deserialize(file);
+            file.Close();
+
+            Console.WriteLine(overview.ToString());
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ReadXML();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 public class Deck
 {
@@ -22,5 +23,15 @@ public class Deck
     {
         Card c = new Card(front, back);
         this.deck.Add(c);
+    }
+
+    public override String ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("Deck Name = " + this.name + "\n");
+        foreach(Card c in this.deck) {
+            sb.AppendLine("Card front= " + c.frontText);
+        }
+        return sb.ToString();
     }
 }
