@@ -103,5 +103,41 @@ namespace StudyCard
         {
             ReadXML();
         }
+
+        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.StreamReader sr = new
+                   System.IO.StreamReader(openFileDialog1.FileName);
+                MessageBox.Show(sr.ReadToEnd());
+                
+                sr.Close();
+                System.Xml.Serialization.XmlSerializer reader =
+                    new System.Xml.Serialization.XmlSerializer(typeof(Deck));
+                System.IO.StreamReader file = new System.IO.StreamReader(
+                    openFileDialog1.FileName);
+                
+                Deck overview = (Deck)reader.Deserialize(file);
+                file.Close();
+
+                Console.WriteLine(overview.ToString());
+            }
+        }
     }
 }
