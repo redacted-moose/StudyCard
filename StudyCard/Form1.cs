@@ -15,12 +15,18 @@ namespace StudyCard
     public partial class StudyCard : Form
     {
         public List<Deck> ls;
-
+        public Deck currentDeck;
 
         public StudyCard()
         {
             InitializeComponent();
             ls = new List<Deck>();
+            Deck test = new Deck("testy");
+            test.AddCard("front1", "back1");
+            test.AddCard("iZombie", "Olivia");
+            test.AddCard("Vmars", "Hollence");
+            ls.Add(test);
+            currentDeck = test;
 
         }
 
@@ -69,39 +75,36 @@ namespace StudyCard
 
         private void SerializeElement()
         {
-            // XmlSerializer ser = new XmlSerializer(typeof(Card));
-            // TextWriter writer = new StreamWriter(filename);
-            // ser.Serialize(writer, new Card("hey", "backstring--"));
-            // writer.Close();
-            // Card overview = new Card();
-            Deck test = new Deck("testy");
-            test.AddCard("front1", "back1");
-            test.AddCard("iZombie", "Olivia");
-            test.AddCard("Vmars", "Hollence");
-            System.Xml.Serialization.XmlSerializer writer =
-                new System.Xml.Serialization.XmlSerializer(typeof(Deck));
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "//StudycardxmllOverview.xml";
-            System.IO.FileStream file = System.IO.File.Create(path);
-            writer.Serialize(file,test);
-            file.Close();
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.Xml.Serialization.XmlSerializer writer =
+                    new System.Xml.Serialization.XmlSerializer(typeof(Deck));
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                System.IO.FileStream file = System.IO.File.Create(path + openFileDialog1.FileName);
+                writer.Serialize(file, currentDeck);
+                Console.WriteLine("file should be there");
+                file.Close();
+            }
         }
 
         public void ReadXML()
         {
-            System.Xml.Serialization.XmlSerializer reader =
-                new System.Xml.Serialization.XmlSerializer(typeof(Deck));
-            System.IO.StreamReader file = new System.IO.StreamReader(
-                @"C:\Users\edwardjh\Documents\StudycardxmllOverview.xml");
-            Deck overview = (Deck)reader.Deserialize(file);
-            file.Close();
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.Xml.Serialization.XmlSerializer reader =
+                    new System.Xml.Serialization.XmlSerializer(typeof(Deck));
+                System.IO.StreamReader file = new System.IO.StreamReader(
+                    saveFileDialog1.FileName);
+                Deck overview = (Deck)reader.Deserialize(file);
+                file.Close();
 
-            Console.WriteLine(overview.ToString());
-
+                Console.WriteLine(overview.ToString());
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ReadXML();
+            //ReadXML();
         }
 
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
@@ -111,7 +114,7 @@ namespace StudyCard
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            
+
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -125,19 +128,52 @@ namespace StudyCard
             {
                 System.IO.StreamReader sr = new
                    System.IO.StreamReader(openFileDialog1.FileName);
-                MessageBox.Show(sr.ReadToEnd());
-                
+                //MessageBox.Show(sr.ReadToEnd());
+
                 sr.Close();
                 System.Xml.Serialization.XmlSerializer reader =
                     new System.Xml.Serialization.XmlSerializer(typeof(Deck));
                 System.IO.StreamReader file = new System.IO.StreamReader(
                     openFileDialog1.FileName);
-                
+
                 Deck overview = (Deck)reader.Deserialize(file);
                 file.Close();
 
                 Console.WriteLine(overview.ToString());
             }
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.Xml.Serialization.XmlSerializer writer =
+                    new System.Xml.Serialization.XmlSerializer(typeof(Deck));
+                System.IO.FileStream file = System.IO.File.Create(saveFileDialog1.FileName);
+                writer.Serialize(file, currentDeck);
+                file.Close();
+            }
+
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+
+            System.Xml.Serialization.XmlSerializer writer =
+                new System.Xml.Serialization.XmlSerializer(typeof(Deck));
+            Directory.SetCurrentDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            var path = Directory.GetCurrentDirectory() + "\\" + currentDeck.name + ".xml";
+            System.IO.FileStream file = System.IO.File.Create(path);
+            writer.Serialize(file, currentDeck);
+            Console.WriteLine("file should be there" + path.ToString());
+            file.Close();
+
         }
     }
 }
