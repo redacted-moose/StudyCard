@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 
 namespace StudyCard
 {
@@ -16,7 +10,7 @@ namespace StudyCard
     {
         public List<Deck> ls;
         public Deck currentDeck;
-        private bool showingFront = false;
+        private bool showingFront = true;
         private int currentDeckIndex = 0;
 
         public StudyCard()
@@ -34,46 +28,43 @@ namespace StudyCard
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //leave blank
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            //leave blank
         }
 
         private void StudyCard_Load(object sender, EventArgs e)
         {
-            //leave blank
         }
 
-        internal void AddDeck(string text)
+        internal void AddDeck(Deck d)
         {
-            Deck d = new Deck(text);
-            ls.Add(d);
-            // textBox1.AppendText(text);
-            // listView1.Items.Add(text);
+            //ls.Add(d);
+            currentDeck = d;
+            currentDeckIndex = 0;
+            textBox1.Text = currentDeck.getDeck()[currentDeckIndex].frontText;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //leave blank
+            //open new dialog and ask for deck name
+            //make new card dialog
+            //end and save deck, then set that to be the current deck.
+            NewDeckForm ndf = new NewDeckForm(this);
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //leave blank
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //SerializeElement();
             if (!showingFront)
             {
                 textBox1.Text = currentDeck.getDeck()[currentDeckIndex].frontText;
                 showingFront = true;
             }
-
             else
             {
                 textBox1.Text = currentDeck.getDeck()[currentDeckIndex].backText;
@@ -112,7 +103,7 @@ namespace StudyCard
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if(currentDeckIndex < currentDeck.getDeck().Count-1)
+            if (currentDeckIndex < currentDeck.getDeck().Count - 1)
             {
                 showingFront = true;
                 currentDeckIndex++;
@@ -122,7 +113,6 @@ namespace StudyCard
 
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
         {
-            //leave blank
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -137,7 +127,6 @@ namespace StudyCard
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            //leave blank
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -162,7 +151,6 @@ namespace StudyCard
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            //leave blank
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)

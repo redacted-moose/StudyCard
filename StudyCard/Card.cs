@@ -1,8 +1,6 @@
-﻿using System;
-
-public class Card
+﻿public class Card
 {
-    int _id;
+    //int _id;
     public string frontText;
     public string backText;
     public string FrontText
@@ -27,7 +25,7 @@ public class Card
 
     public Card()
     {
-        this.frontText = "hey";
+        this.frontText = "frontside";
         this.backText = "backside text here";
     }
 }
