@@ -74,7 +74,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(782, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.UseWaitCursor = true;
             // 
             // fileToolStripMenuItem1
             // 
@@ -252,13 +251,18 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(20, 41);
+            this.textBox1.AcceptsReturn = true;
+            this.textBox1.AcceptsTab = true;
+            this.textBox1.Enabled = false;
+            this.textBox1.Font = new System.Drawing.Font("Verdana", 19.8F);
+            this.textBox1.Location = new System.Drawing.Point(160, 143);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(740, 450);
+            this.textBox1.Size = new System.Drawing.Size(473, 264);
             this.textBox1.TabIndex = 3;
-            this.textBox1.UseWaitCursor = true;
+            this.textBox1.Text = "hello\r\ntest\r\ncode";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button1
             // 
@@ -268,7 +272,6 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Previous";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.UseWaitCursor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // button2
@@ -279,7 +282,6 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "Flip";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.UseWaitCursor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
@@ -290,7 +292,6 @@
             this.button3.TabIndex = 6;
             this.button3.Text = "Next";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.UseWaitCursor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // openFileDialog1
@@ -314,7 +315,6 @@
             this.Controls.Add(this.menuStrip1);
             this.Name = "StudyCard";
             this.Text = "StudyCard";
-            this.UseWaitCursor = true;
             this.Load += new System.EventHandler(this.StudyCard_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

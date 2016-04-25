@@ -7,11 +7,13 @@ public class Deck
 {
     public string name;
     public List<Card> deck;
-    //Array<Card> cards;
+
+
     public Deck()
     {
         this.name = "test";
         this.deck = new List<Card>();
+
     }
 	public Deck(string name)
 	{
@@ -33,5 +35,10 @@ public class Deck
             sb.AppendLine("Card front= " + c.frontText);
         }
         return sb.ToString();
+    }
+
+    public List<Card> getDeck()
+    {
+        return this.deck;
     }
 }

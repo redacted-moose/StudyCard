@@ -16,13 +16,15 @@ namespace StudyCard
     {
         public List<Deck> ls;
         public Deck currentDeck;
+        private bool showingFront = false;
+        private int currentDeckIndex = 0;
 
         public StudyCard()
         {
             InitializeComponent();
             ls = new List<Deck>();
             Deck test = new Deck("testy");
-            test.AddCard("front1", "back1");
+            test.AddCard("Please choose a deck or make a new deck", "back1");
             test.AddCard("iZombie", "Olivia");
             test.AddCard("Vmars", "Hollence");
             ls.Add(test);
@@ -32,22 +34,17 @@ namespace StudyCard
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Deck d = new Deck("test");
-            // ls.Add(d);
-            // textBox1.AppendText("test worked");
-            // string thing = listView1.SelectedItems.ToString();
-            // View the Deck!
-            // new form (thing).Show();
+            //leave blank
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            //leave blank
         }
 
         private void StudyCard_Load(object sender, EventArgs e)
         {
-
+            //leave blank
         }
 
         internal void AddDeck(string text)
@@ -60,17 +57,28 @@ namespace StudyCard
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // new NewDeckForm(this).Show();
-
+            //leave blank
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //leave blank
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SerializeElement();
+            //SerializeElement();
+            if (!showingFront)
+            {
+                textBox1.Text = currentDeck.getDeck()[currentDeckIndex].frontText;
+                showingFront = true;
+            }
+
+            else
+            {
+                textBox1.Text = currentDeck.getDeck()[currentDeckIndex].backText;
+                showingFront = false;
+            }
         }
 
         private void SerializeElement()
@@ -104,22 +112,32 @@ namespace StudyCard
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //ReadXML();
+            if(currentDeckIndex < currentDeck.getDeck().Count-1)
+            {
+                showingFront = true;
+                currentDeckIndex++;
+                textBox1.Text = currentDeck.getDeck()[currentDeckIndex].frontText;
+            }
         }
 
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
         {
-
+            //leave blank
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            if (currentDeckIndex > 0)
+            {
+                showingFront = true;
+                currentDeckIndex--;
+                textBox1.Text = currentDeck.getDeck()[currentDeckIndex].frontText;
+            }
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-
+            //leave blank
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -128,24 +146,23 @@ namespace StudyCard
             {
                 System.IO.StreamReader sr = new
                    System.IO.StreamReader(openFileDialog1.FileName);
-                //MessageBox.Show(sr.ReadToEnd());
-
                 sr.Close();
                 System.Xml.Serialization.XmlSerializer reader =
                     new System.Xml.Serialization.XmlSerializer(typeof(Deck));
                 System.IO.StreamReader file = new System.IO.StreamReader(
                     openFileDialog1.FileName);
-
                 Deck overview = (Deck)reader.Deserialize(file);
+                currentDeck = overview;
+                currentDeckIndex = 0;
+                textBox1.Text = currentDeck.getDeck()[currentDeckIndex].frontText;
+                showingFront = true;
                 file.Close();
-
-                Console.WriteLine(overview.ToString());
             }
         }
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-
+            //leave blank
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -158,13 +175,10 @@ namespace StudyCard
                 writer.Serialize(file, currentDeck);
                 file.Close();
             }
-
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-
             System.Xml.Serialization.XmlSerializer writer =
                 new System.Xml.Serialization.XmlSerializer(typeof(Deck));
             Directory.SetCurrentDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
@@ -173,7 +187,6 @@ namespace StudyCard
             writer.Serialize(file, currentDeck);
             Console.WriteLine("file should be there" + path.ToString());
             file.Close();
-
         }
     }
 }
