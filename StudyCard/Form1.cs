@@ -18,12 +18,12 @@ namespace StudyCard
             InitializeComponent();
             ls = new List<Deck>();
             Deck test = new Deck("testy");
-            test.AddCard("Please choose a deck or make a new deck", "back1");
+            test.AddCard("Welcome! Please choose a deck from which to study or make a new deck.", "back1");
             test.AddCard("iZombie", "Olivia");
             test.AddCard("Vmars", "Hollence");
             ls.Add(test);
+            textBox1.Text = test.getDeck()[currentDeckIndex].frontText;
             currentDeck = test;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -175,6 +175,27 @@ namespace StudyCard
             writer.Serialize(file, currentDeck);
             Console.WriteLine("file should be there" + path.ToString());
             file.Close();
+        }
+
+        private void addCardToDeckToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewDeckForm ndf = new NewDeckForm(this, currentDeck);
+        }
+
+        private void editCardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditCardForm ecf = new EditCardForm(this, currentDeck.getDeck()[currentDeckIndex]);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            this.Close();
+        }
+
+        public void setTextBox1(string ss)
+        {
+            this.textBox1.Text = ss;
         }
     }
 }

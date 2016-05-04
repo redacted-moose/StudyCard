@@ -15,6 +15,7 @@ namespace StudyCard
 
         StudyCard mainForm;
         Deck newDeck;
+        int mode = 0;
 
         public NewDeckForm()
         {
@@ -31,6 +32,25 @@ namespace StudyCard
             label3.Hide();
             button2.Hide();
             button3.Hide();
+            this.Show();
+        }
+
+        public NewDeckForm(StudyCard mainForm, Deck d)
+        {
+            this.mainForm = mainForm;
+            InitializeComponent();
+            this.mode = 1;
+            newDeck = d;
+            label1.Hide();
+            textBox1.Hide();
+            button1.Hide();
+            //this.Close();
+            textBox2.Show();
+            textBox3.Show();
+            label2.Show();
+            label3.Show();
+            button2.Show();
+            button3.Show();
             this.Show();
         }
 
@@ -62,7 +82,10 @@ namespace StudyCard
 
         private void button2_Click(object sender, EventArgs e)
         {
-            mainForm.AddDeck(newDeck);
+            if(this.mode < 1)
+            {
+                mainForm.AddDeck(newDeck);
+            }
             this.Close();
         }
 
